@@ -10,15 +10,17 @@ from io import BytesIO
 subscription_key = "ea2c5997ddac418980aebbaf569c34ca"
 assert subscription_key
 
-#assing face api url
+# Accessing face api url
 face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect/"
 
 # set image path to local address
 image_path = "/home/shashank/Face_Detection/Image_0.jpg"
 
-# Read Image into byte array
+# Read Image into byte array(use absolute address)
 image_data = open(image_path, "rb").read()
 
+
+# header for reading local image
 headers = {'Ocp-Apim-Subscription-Key': subscription_key,
 		   'Content-Type': 'application/octet-stream'}
 
