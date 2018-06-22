@@ -32,15 +32,12 @@ params = {
     'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
 }
 
+
 # Send Image and Get Response
 response = requests.post(
     face_api_url, headers=headers, params=params, data=image_data)
 faces = response.json()
 
-# Display the originl imag and overlay it with the face information:
-res_json = json.loads(response.content.decode('utf-8'))
-
-print(json.dumps(res_json, indent = 2, sort_keys = True))
 
 # save face data to csv file "face_data.csv"
 data = faces
@@ -50,3 +47,19 @@ csv_file.writerow(data[0].keys())
 for item in data:
 	csv_file.writerow(item.values())
 f.close()
+
+# Display the originl imag and overlay it with the face information:
+res_json = json.loads(response.content.decode('utf-8'))
+print(json.dumps(res_json, indent = 2, sort_keys = True))
+
+with open('face_data_json.txt','w') as outfile:
+	json.dump(faces, outfile, indent=2, sort_keys = True, ensure_ascii = False)
+
+for item in faces:
+	my_dict = {}
+	my_dict['Gender'] = item.get('gender')
+#	my_dict['Age'] = item.get('faceAttributes').get('age')
+#	my_dict['Emotion'] = item.get('emotion').get('happiness')
+	for i in item:
+		print(i)
+
