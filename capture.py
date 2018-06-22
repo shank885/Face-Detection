@@ -31,7 +31,7 @@ while True:
 		cv2.imwrite(img_name, frame)
 		print("{} Written!!".format(img_name))
 		image_counter += 1
-	
+		break
 
 
 '''
@@ -40,7 +40,7 @@ KEY = 'ea2c5997ddac418980aebbaf569c34ca'
 CF.Key.set(KEY)
 
 #Regional Base Url to upload Picture
-BASE_URL = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0'
+BASE_URL = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/'
 CF.BaseUrl.set(BASE_URL)
 
 
@@ -57,11 +57,16 @@ def getRectangle(faceDictionary):
 	right = top + rect['width']
 	return ((left, top), (bottom, right))
 
-# Load image
-img = Image.open("Image_0.png")
+# set image path to local address
+image_path = "/home/shashank/Face_Detection/Image_0.jpg"
+
+# Read Image into byte array
+image_data = open(image_path, "rb").read()
+face_to_detect = bytearray(image_data)
+faces = CF.face.detect(face_to_detect)
 
 # For each face returned use face rectange and draw a red box.
-draw = ImageDraw.Draw(img)
+draw = ImageDraw.Draw(face_to_detect)
 for face in faces:
 	draw.rectangle(getRectangle(face), outline='red')
 
@@ -71,9 +76,8 @@ img.show()
 
 
 
-
+'''
 
 #Release cam object and close all image windows
-'''
 cam.release()
-cv2.destroyAllWindow()
+cv2.destroyAllWindows()
