@@ -14,6 +14,7 @@ image_counter = 0
 
 while True:
 	if(cam.isOpened()):
+		# Read frame from camera
 		flag, frame = cam.read()
 	cv2.imshow("Captured Image", frame)
 
@@ -32,51 +33,6 @@ while True:
 		print("{} Written!!".format(img_name))
 		image_counter += 1
 		break
-
-
-'''
-#set API key
-KEY = 'ea2c5997ddac418980aebbaf569c34ca'
-CF.Key.set(KEY)
-
-#Regional Base Url to upload Picture
-BASE_URL = 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/'
-CF.BaseUrl.set(BASE_URL)
-
-
-faces = CF.face.detect("Image_0.png")
-print(faces)
-
-# Convert width height to a point in a rectangle
-
-def getRectangle(faceDictionary):
-	rect = faceDictionary['faceRectangle']
-	left = rect['left']
-	top = rect['top']
-	bottom = left + rect['height']
-	right = top + rect['width']
-	return ((left, top), (bottom, right))
-
-# set image path to local address
-image_path = "/home/shashank/Face_Detection/Image_0.jpg"
-
-# Read Image into byte array
-image_data = open(image_path, "rb").read()
-face_to_detect = bytearray(image_data)
-faces = CF.face.detect(face_to_detect)
-
-# For each face returned use face rectange and draw a red box.
-draw = ImageDraw.Draw(face_to_detect)
-for face in faces:
-	draw.rectangle(getRectangle(face), outline='red')
-
-# Display the image in the user default image browser
-img.show()
-
-
-
-
-'''
 
 #Release cam object and close all image windows
 cam.release()
