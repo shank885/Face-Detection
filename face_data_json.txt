@@ -78,7 +78,7 @@
       },
       "smile": 0.994
     },
-    "faceId": "9f005ac1-6648-4bf2-a782-4c6eef790e89",
+    "faceId": "6bbf682c-cc21-48f2-b2d3-2e3764192e5b",
     "faceRectangle": {
       "height": 110,
       "left": 312,

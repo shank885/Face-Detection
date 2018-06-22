@@ -57,9 +57,8 @@ with open('face_data_json.txt','w') as outfile:
 
 for item in faces:
 	my_dict = {}
-	my_dict['Gender'] = item.get('gender')
-#	my_dict['Age'] = item.get('faceAttributes').get('age')
-#	my_dict['Emotion'] = item.get('emotion').get('happiness')
-	for i in item:
-		print(i)
+	my_dict['Gender'] = item.get('faceAttributes').get('gender')
+	my_dict['Age'] = item.get('faceAttributes').get('age')
+	my_dict['Emotions'] = item.get('faceAttributes').get('emotion')
+	print(my_dict)	
 
