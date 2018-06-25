@@ -2,24 +2,24 @@
   {
     "faceAttributes": {
       "accessories": [],
-      "age": 36.0,
+      "age": 33.0,
       "blur": {
-        "blurLevel": "medium",
-        "value": 0.51
+        "blurLevel": "high",
+        "value": 0.87
       },
       "emotion": {
-        "anger": 0.0,
+        "anger": 0.001,
         "contempt": 0.001,
         "disgust": 0.0,
         "fear": 0.0,
-        "happiness": 0.234,
-        "neutral": 0.765,
+        "happiness": 0.001,
+        "neutral": 0.996,
         "sadness": 0.0,
-        "surprise": 0.0
+        "surprise": 0.001
       },
       "exposure": {
         "exposureLevel": "underExposure",
-        "value": 0.2
+        "value": 0.23
       },
       "facialHair": {
         "beard": 0.4,
@@ -29,7 +29,7 @@
       "gender": "male",
       "glasses": "NoGlasses",
       "hair": {
-        "bald": 0.15,
+        "bald": 0.31,
         "hairColor": [
           {
             "color": "black",
@@ -37,19 +37,19 @@
           },
           {
             "color": "gray",
-            "confidence": 0.94
+            "confidence": 0.9
           },
           {
             "color": "other",
-            "confidence": 0.71
+            "confidence": 0.47
           },
           {
             "color": "brown",
-            "confidence": 0.17
+            "confidence": 0.32
           },
           {
             "color": "blond",
-            "confidence": 0.02
+            "confidence": 0.15
           },
           {
             "color": "red",
@@ -60,30 +60,30 @@
       },
       "headPose": {
         "pitch": 0.0,
-        "roll": 2.8,
-        "yaw": 2.9
+        "roll": 0.5,
+        "yaw": 4.1
       },
       "makeup": {
         "eyeMakeup": false,
         "lipMakeup": false
       },
       "noise": {
-        "noiseLevel": "high",
-        "value": 0.76
+        "noiseLevel": "medium",
+        "value": 0.5
       },
       "occlusion": {
         "eyeOccluded": false,
         "foreheadOccluded": false,
         "mouthOccluded": false
       },
-      "smile": 0.234
+      "smile": 0.001
     },
-    "faceId": "5b2fef79-5677-4a90-9d63-38ac7019ea20",
+    "faceId": "6d8b8416-fa51-4cde-8d3c-79f6d8f791f1",
     "faceRectangle": {
-      "height": 153,
-      "left": 322,
-      "top": 160,
-      "width": 153
+      "height": 143,
+      "left": 316,
+      "top": 128,
+      "width": 143
     }
   }
 ]

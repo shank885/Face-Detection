@@ -52,9 +52,9 @@ def getFaceData(subscription_key, face_api_url, image_path):
 	# Send Image and Get Response with error handling:
 	try:
 		response = requests.post(face_api_url, 
-								headers=headers, 
-								params=params, 
-								data=image_data
+								headers = headers, 
+								params = params, 
+								data = image_data
 								)
 		response.raise_for_status()
 		faces = response.json()
@@ -123,7 +123,7 @@ subscription_key = "ea2c5997ddac418980aebbaf569c34ca"
 face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect/"
 
 # set image path to local address(Needs to be changed for different systems)
-image_path = "/home/shashank/Face_Detection/Image_0.jpg"
+image_path = "Image_0.jpg"
 
 # call clickPhoto() and subscequent functions
 click_flag = clickPhoto()		
