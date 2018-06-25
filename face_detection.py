@@ -3,6 +3,7 @@ import json
 import csv
 import cv2
 import os
+from os.path import join, dirname
 from dotenv import load_dotenv
 
 
@@ -120,10 +121,10 @@ def showImage():
 	print("Image Shown")
 
 
-load_dotenv(verbose=True)
-# Assign subscription key
-subscription_key = os.getenv("SUBSCRIPTION_KEY")
-print(subscription_key)
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+# Accessing subscription key
+subscription_key = os.getenv('SUBSCRIPTION_KEY')
 # Accessing face api url
 face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect/"
 
