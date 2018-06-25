@@ -26,12 +26,14 @@ while True:
 	if k%256 == 27:
 		#ESC pressed ----- Break
 		print("!!Escape Hit!!, Closing.....")
+		print("Loading Previous Image......")
 		break
 	elif k%256 == 32:
 		#SPACE pressed ---  Save Image
 		img_name = "Image_0.jpg"
 		cv2.imwrite(img_name, frame)
 		print("{} Written!!".format(img_name))
+		print("Loading Captured Image........")
 		break
 
 #Release cam object and close all image windows
@@ -88,9 +90,18 @@ with open('face_data_json.txt','w') as outfile:
 
 for item in faces:
 	my_dict = {}
-	my_dict['Gender'] = item.get('faceAttributes').get('gender')
-	my_dict['Age'] = item.get('faceAttributes').get('age')
-	my_dict['Emotions'] = item.get('faceAttributes').get('emotion')
+	my_dict['Gender'] = item['faceAttributes']['gender']
+	#my_dict['Gender'] = item.get('faceAttributes').get('gender')
+	my_dict['Age'] = item['faceAttributes']['age']
+	emotion_conf = 0
+	emo_name = " "
+	for emo in item['faceAttributes']['emotion']:
+		if item['faceAttributes']['emotion'][emo] > emotion_conf:
+			emotion_conf = item['faceAttributes']['emotion'][emo]
+			emo_name = emo
+	my_dict['Emotion'] = emo_name
+	print("%s : %s"% (emo_name, emotion_conf))
+	#my_dict['Emotions'] = item['faceAttributes']['emotion']
 
 for (k,v) in my_dict.items():
 	print("%s : %s"% (k, v)) 
