@@ -2,6 +2,9 @@ import requests
 import json
 import csv
 import cv2
+import os
+from dotenv import load_dotenv
+
 
 def clickPhoto():
 	#create a VideoCapture object and a window "Captured Image"
@@ -117,8 +120,10 @@ def showImage():
 	print("Image Shown")
 
 
+load_dotenv(verbose=True)
 # Assign subscription key
-subscription_key = "ea2c5997ddac418980aebbaf569c34ca"
+subscription_key = os.getenv("SUBSCRIPTION_KEY")
+print(subscription_key)
 # Accessing face api url
 face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect/"
 
