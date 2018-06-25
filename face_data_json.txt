@@ -1,25 +1,20 @@
 [
   {
     "faceAttributes": {
-      "accessories": [
-        {
-          "confidence": 0.96,
-          "type": "headwear"
-        }
-      ],
-      "age": 31.0,
+      "accessories": [],
+      "age": 28.0,
       "blur": {
         "blurLevel": "low",
-        "value": 0.02
+        "value": 0.0
       },
       "emotion": {
-        "anger": 0.0,
-        "contempt": 0.098,
-        "disgust": 0.001,
+        "anger": 0.001,
+        "contempt": 0.001,
+        "disgust": 0.0,
         "fear": 0.0,
-        "happiness": 0.562,
-        "neutral": 0.336,
-        "sadness": 0.002,
+        "happiness": 0.004,
+        "neutral": 0.992,
+        "sadness": 0.0,
         "surprise": 0.001
       },
       "exposure": {
@@ -27,21 +22,46 @@
         "value": 0.0
       },
       "facialHair": {
-        "beard": 0.9,
-        "moustache": 0.6,
+        "beard": 0.1,
+        "moustache": 0.1,
         "sideburns": 0.1
       },
       "gender": "male",
       "glasses": "NoGlasses",
       "hair": {
-        "bald": 0.0,
-        "hairColor": [],
-        "invisible": true
+        "bald": 0.28,
+        "hairColor": [
+          {
+            "color": "black",
+            "confidence": 1.0
+          },
+          {
+            "color": "gray",
+            "confidence": 0.86
+          },
+          {
+            "color": "other",
+            "confidence": 0.75
+          },
+          {
+            "color": "brown",
+            "confidence": 0.17
+          },
+          {
+            "color": "blond",
+            "confidence": 0.01
+          },
+          {
+            "color": "red",
+            "confidence": 0.0
+          }
+        ],
+        "invisible": false
       },
       "headPose": {
         "pitch": 0.0,
-        "roll": 17.2,
-        "yaw": -0.3
+        "roll": -3.9,
+        "yaw": 0.7
       },
       "makeup": {
         "eyeMakeup": false,
@@ -49,21 +69,21 @@
       },
       "noise": {
         "noiseLevel": "low",
-        "value": 0.22
+        "value": 0.0
       },
       "occlusion": {
         "eyeOccluded": false,
-        "foreheadOccluded": true,
+        "foreheadOccluded": false,
         "mouthOccluded": false
       },
-      "smile": 0.562
+      "smile": 0.004
     },
-    "faceId": "8161a012-bdca-4136-a3bb-7ce75442cf2a",
+    "faceId": "09697624-3fb6-403c-a55f-38dd25dbf018",
     "faceRectangle": {
-      "height": 160,
-      "left": 296,
-      "top": 319,
-      "width": 177
+      "height": 155,
+      "left": 283,
+      "top": 187,
+      "width": 155
     }
   }
 ]
