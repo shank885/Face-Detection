@@ -121,7 +121,8 @@ def showImage():
 subscription_key = "ea2c5997ddac418980aebbaf569c34ca"
 # Accessing face api url
 face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect/"
-# set image path to local address
+
+# set image path to local address(Needs to be changed for different systems)
 image_path = "/home/shashank/Face_Detection/Image_0.jpg"
 
 # call clickPhoto() and subscequent functions
