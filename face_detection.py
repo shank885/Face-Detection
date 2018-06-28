@@ -85,20 +85,20 @@ def printFaceData(faces):
 		age = round(item['faceAttributes']['age'],2)
 
 		face_name = "FACE :{}".format(face_count)
-		print(face_name,"\n")
-		print('Face Id: %s'% faceId)
-		print(gender)
-		print(age)
+		print(face_name)
+		print('Face Id: ', faceId)
+		print("Gender :", gender)
+		print("Age :", age)
 		emotion_conf = 0
 		emotion = " "
 		for emo in item['faceAttributes']['emotion']:
 			if item['faceAttributes']['emotion'][emo] > emotion_conf:
 				emotion_conf = item['faceAttributes']['emotion'][emo]
 				emotion = emo
-		print(emotion)
+		print("Emotion :", emotion)
 		emotion_percent = round(emotion_conf*100,2)
 		print("%s percentage : %s"% (emotion, emotion_percent),"\n")
-
+		# insert face data to database
 		insert_to_database.insert_face_data(faceId, gender, age, emotion, emotion_percent)
 	
 	print("*****Face Data Printed*****")
