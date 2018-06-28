@@ -5,7 +5,7 @@ import cv2
 import os
 from os.path import join, dirname
 from dotenv import load_dotenv
-
+import insert_to_database
 
 def clickPhoto():
 	#create a VideoCapture object and a window "Captured Image"
@@ -62,7 +62,7 @@ def getFaceData(subscription_key, face_api_url, image_path):
 								)
 		response.raise_for_status()
 		faces = response.json()
-		print("Face Data Received")
+		print("*****Face Data Received*****")
 		return faces
 	except requests.exceptions.HTTPError as errh:
 		print ("Http Error:",errh)
@@ -75,39 +75,33 @@ def getFaceData(subscription_key, face_api_url, image_path):
 	return None
 	
 
-def saveFaceData(faces):
-	# save face data to csv file "face_data.csv"
-	data = faces
-	f = open('face_data.csv','w')
-	csv_file = csv.writer(f)
-	csv_file.writerow(data[0].keys())
-	for item in data:
-		csv_file.writerow(item.values())
-	f.close()
-	with open('face_data_json.txt','w') as outfile:
-		json.dump(faces, outfile, indent=2, sort_keys = True, ensure_ascii = False)
-	outfile.close()
-	print("Face Data Saved")								
-
-
 def printFaceData(faces):
 	
 	face_count = 0
 	for item in faces:
 		face_count += 1
+		faceId = item['faceId']
+		gender = item['faceAttributes']['gender']
+		age = round(item['faceAttributes']['age'],2)
+
 		face_name = "FACE :{}".format(face_count)
 		print(face_name,"\n")
-		print(item['faceAttributes']['gender'])
-		print(item['faceAttributes']['age'])
+		print('Face Id: %s'% faceId)
+		print(gender)
+		print(age)
 		emotion_conf = 0
-		emo_name = " "
+		emotion = " "
 		for emo in item['faceAttributes']['emotion']:
 			if item['faceAttributes']['emotion'][emo] > emotion_conf:
 				emotion_conf = item['faceAttributes']['emotion'][emo]
-				emo_name = emo
-		print(emo_name)
-		print("%s percentage : %s"% (emo_name, emotion_conf*100),"\n")
-	print("Face Data Printed")
+				emotion = emo
+		print(emotion)
+		emotion_percent = round(emotion_conf*100,2)
+		print("%s percentage : %s"% (emotion, emotion_percent),"\n")
+
+		insert_to_database.insert_face_data(faceId, gender, age, emotion, emotion_percent)
+	
+	print("*****Face Data Printed*****")
 
 
 def showImage():
@@ -118,13 +112,13 @@ def showImage():
 	# press escape to close all image windows
 	if k%256 == 27:
 		cv2.destroyAllWindows()
-	print("Image Shown")
+	print("*****Image Shown*****")
 
 
 dotenv_path = join(dirname(__file__), '.env')
 load_dotenv(dotenv_path)
 # Accessing subscription key
-subscription_key = os.getenv('SUBSCRIPTION_KEY')
+subscription_key = os.getenv('subscription_key')
 # Accessing face api url
 face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect/"
 
@@ -136,8 +130,10 @@ click_flag = clickPhoto()
 if click_flag:
 	faces = getFaceData(subscription_key, face_api_url, image_path)
 	if faces:
-		saveFaceData(faces)
 		printFaceData(faces)
 		showImage()
+	else:
+		print("*****No Face Detected*****")
+		showImage()
 else:
-	print("!!!!!!!!!!No Photo Chaptured!!!!!!!!!")
+	print("*****No Photo Chaptured*****")
