@@ -1,16 +1,12 @@
-import requests 
-import json
-import csv
+import requests
 import cv2
 import os
+import time
 from os.path import join, dirname
 from dotenv import load_dotenv
 import insert_to_database
 
 def clickPhoto():
-	#create a VideoCapture object and a window "Captured Image"
-	cam = cv2.VideoCapture(0)
-	cv2.namedWindow("Captured Frame")
 
 	while True:
 		if(cam.isOpened()):
@@ -20,22 +16,16 @@ def clickPhoto():
 
 		if not flag:
 			break
-		k = cv2.waitKey(1)
+		
+		img_name = "Image_0.jpg"
+		cv2.imwrite(img_name, frame)
+		print("..........{} Written!!.........".format(img_name))
+		print("..........Loading Captured Image........")
 
-		if k%256 == 27:
-			#ESC pressed ----- Break
-			print("!!Escape Hit!!, Closing.....")
-			return 0
-		elif k%256 == 32:
-			#SPACE pressed ---  Save Image
-			img_name = "Image_0.jpg"
-			cv2.imwrite(img_name, frame)
-			print("..........{} Written!!.........".format(img_name))
-			print("..........Loading Captured Image........")
-			#Release cam object and close all image windows
-			cam.release()
-			cv2.destroyWindow("Captured Frame")
-			return 1
+		#Release cam object and close all image windows
+		#cam.release()
+		cv2.destroyWindow("Captured Frame")
+		break
 
 
 def getFaceData(subscription_key, face_api_url, image_path):
@@ -50,8 +40,8 @@ def getFaceData(subscription_key, face_api_url, image_path):
 	params = {
     	'returnFaceId': 'true',
     	'returnFaceLandmarks': 'false',
-    	'returnFaceAttributes': 'age,gender,headPose,smile,facialHair,glasses,' +
-    	'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
+    	'returnFaceAttributes': 'age,gender,smile,' +
+    	'emotion'
 	}
 	# Send Image and Get Response with error handling:
 	try:
@@ -66,12 +56,20 @@ def getFaceData(subscription_key, face_api_url, image_path):
 		return faces
 	except requests.exceptions.HTTPError as errh:
 		print ("Http Error:",errh)
+		time.sleep(300)
+		main()
 	except requests.exceptions.ConnectionError as errc:
 		print ("Error Connecting:",errc)
+		time.sleep(300)
+		main()
 	except requests.exceptions.Timeout as errt:
 		print ("Timeout Error:",errt)
+		time.sleep(300)
+		main()
 	except requests.exceptions.RequestException as err:
 		print ("OOps: Something Else",err)
+		time.sleep(300)
+		main()
 	return None
 	
 
@@ -103,7 +101,7 @@ def printFaceData(faces):
 	
 	print("*****Face Data Printed*****")
 
-
+'''
 def showImage():
 
 	img = cv2.imread("Image_0.jpg")
@@ -113,6 +111,20 @@ def showImage():
 	if k%256 == 27:
 		cv2.destroyAllWindows()
 	print("*****Image Shown*****")
+'''
+def main():
+	while (1):
+		clickPhoto()
+		faces = getFaceData(subscription_key, face_api_url, image_path)
+		if faces:
+			printFaceData(faces)
+			#showImage()
+		else:
+			print("*****No Face Detected*****")
+			#showImage()
+	print("*****No Photo Chaptured*****")
+	cam.release()
+
 
 
 dotenv_path = join(dirname(__file__), '.env')
@@ -125,15 +137,7 @@ face_api_url = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0/dete
 # set image path to local address(Needs to be changed for different systems)
 image_path = "Image_0.jpg"
 
-# call clickPhoto() and subscequent functions
-click_flag = clickPhoto()		
-if click_flag:
-	faces = getFaceData(subscription_key, face_api_url, image_path)
-	if faces:
-		printFaceData(faces)
-		showImage()
-	else:
-		print("*****No Face Detected*****")
-		showImage()
-else:
-	print("*****No Photo Chaptured*****")
+#create a VideoCapture object and a window "Captured Image"
+cam = cv2.VideoCapture(0)
+cv2.namedWindow("Captured Frame")
+main()
