@@ -33,11 +33,3 @@ def insert_face_data(face_id, gender, age, emotion, emotion_percent):
         print("Face Data Inserted To Database")
 
 
-
-'''
-def main():
-   insert_face_data()
- 
-if __name__ == '__main__':
-    main()
-'''

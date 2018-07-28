@@ -50,8 +50,8 @@ def getFaceData(subscription_key, face_api_url, image_path):
 	params = {
     	'returnFaceId': 'true',
     	'returnFaceLandmarks': 'false',
-    	'returnFaceAttributes': 'age,gender,headPose,smile,facialHair,glasses,' +
-    	'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
+    	'returnFaceAttributes': 'age,gender' +
+    	'emotion'
 	}
 	# Send Image and Get Response with error handling:
 	try:
